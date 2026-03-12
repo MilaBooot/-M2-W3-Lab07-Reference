@@ -1,0 +1,66 @@
+data:
+  raw_path:       "data/raw/fraud_oracle.csv"
+  cleaned_path:   "data/processed/cleaned_data.csv"
+  features_path:  "data/processed/features.csv"
+
+features:
+  # Numeric columns — kept as-is after ordinal conversion in cleaning.py
+  numerical:
+    - "Age"
+    - "Deductible"
+    - "DriverRating"
+    - "Days_Policy_Accident"     # converted from string range to numeric midpoint
+    - "Days_Policy_Claim"        # converted from string range to numeric midpoint
+    - "PastNumberOfClaims"       # converted from string range to numeric midpoint
+    - "NumberOfSuppliments"      # converted from string range to numeric midpoint
+    - "WeekOfMonth"
+    - "WeekOfMonthClaimed"
+    - "Year"
+
+  # Binary columns — encoded as 0/1 in cleaning.py
+  binary:
+    - "PoliceReportFiled"        # Yes=1, No=0
+    - "WitnessPresent"           # Yes=1, No=0
+    - "AgentType"                # Internal=1, External=0
+
+  # Categorical columns — one-hot encoded in build_features.py
+  categorical:
+    - "Month"
+    - "DayOfWeek"
+    - "Make"
+    - "AccidentArea"
+    - "DayOfWeekClaimed"
+    - "MonthClaimed"
+    - "Sex"
+    - "MaritalStatus"
+    - "Fault"
+    - "PolicyType"
+    - "VehicleCategory"
+    - "VehiclePrice"
+    - "AgeOfVehicle"
+    - "AgeOfPolicyHolder"
+    - "AddressChange_Claim"
+    - "NumberOfCars"
+    - "BasePolicy"
+
+  # Label column — NEVER used as a training feature
+  # Only used post-hoc to evaluate unsupervised model quality
+  label: "FraudFound_P"
+
+  # Columns to drop — identifiers with no fraud signal
+  drop:
+    - "PolicyNumber"
+    - "RepNumber"
+
+model:
+  type:           "IsolationForest"
+  contamination:  0.06      # expected fraction of anomalies (~6% fraud rate)
+  n_estimators:   100       # number of isolation trees
+  max_samples:    256       # samples per tree (256 is empirically optimal)
+  random_state:   42
+  top_n_flagged:  200       # top suspicious claims routed to investigation team
+
+reports:
+  figures_dir:    "reports/figures"
+  statistics_dir: "reports/statistics"
+  metrics_path:   "reports/metrics.txt"
