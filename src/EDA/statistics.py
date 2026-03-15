@@ -70,7 +70,7 @@ def run_statistics(cfg):
 
     # Encode any remaining categoricals for MI calculation
     df_enc = df.copy()
-    for col in df_enc.select_dtypes(include="object").columns:
+    for col in df_enc.select_dtypes(include=["object", "string"]).columns:
         df_enc[col] = LabelEncoder().fit_transform(df_enc[col].astype(str))
 
     feature_cols = [c for c in df_enc.columns if c != "FraudFound_P"]
@@ -116,7 +116,7 @@ def run_statistics(cfg):
     lines.append("  between fraudulent and legitimate claims.")
     lines.append("")
 
-    cat_cols = df.select_dtypes(include="object").columns.tolist()
+    cat_cols = df.select_dtypes(include=["object", "string"]).columns.tolist()
     chi2_results = []
     for col in cat_cols:
         ct = pd.crosstab(df[col], y)
@@ -147,7 +147,7 @@ def run_statistics(cfg):
 
     # Write to file
     report = "\n".join(lines)
-    with open(output_path, "w") as f:
+    with open(output_path, "w", encoding="utf-8") as f:
         f.write(report)
 
     logging.info(f"Statistical summary saved → {output_path}")

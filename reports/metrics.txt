@@ -1,0 +1,19 @@
+Isolation Forest — Insurance Fraud Detection
+=============================================
+Model type     : IsolationForest
+contamination  : 0.06
+n_estimators   : 100
+max_samples    : 256
+random_state   : 42
+─────────────────────────────────────────────
+Total claims   : 15,420
+Flagged        : 926  (6.01%)
+Actual fraud   : 923  (5.99%)
+─────────────────────────────────────────────
+Precision      : 0.0626
+Recall         : 0.0628
+F1 Score       : 0.0627
+─────────────────────────────────────────────
+Confusion Matrix:
+  TN=13,629  FP=868
+  FN=865  TP=58

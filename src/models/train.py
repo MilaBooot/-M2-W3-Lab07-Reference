@@ -171,7 +171,7 @@ def train(cfg):
         f"  TN={cm[0,0]:,}  FP={cm[0,1]:,}\n"
         f"  FN={cm[1,0]:,}  TP={cm[1,1]:,}\n"
     )
-    with open(metrics_path, "w") as f:
+    with open(metrics_path, "w", encoding="utf-8") as f:
         f.write(metrics_text)
     logging.info(f"Metrics → {metrics_path}")
     print(metrics_text)
