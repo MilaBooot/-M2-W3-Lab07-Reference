@@ -1,0 +1,111 @@
+=================================================================
+  INSURANCE FRAUD DETECTION — STATISTICAL AUDIT REPORT
+=================================================================
+
+── 1. CLASS IMBALANCE ──────────────────────────────────────
+  Total claims:            15,420
+  Legitimate (0):          14,497  (94.01%)
+  Fraudulent (1):             923  (5.99%)
+  Imbalance ratio:       15.7:1  (legitimate:fraud)
+
+  ML Impact: Isolation Forest handles imbalance naturally —
+  it does not use labels, so class skew does not bias training.
+  However, contamination should be set close to the fraud rate
+  (0.060) to match the expected anomaly proportion.
+
+── 2. MUTUAL INFORMATION SCORES (vs FraudFound_P) ─────────
+  Higher score = feature shares more information with the
+  fraud label. Use this to prioritise features.
+
+  Feature                           MI Score
+  ------------------------------  ----------
+  BasePolicy                          0.0219  ← TOP SIGNAL
+  PolicyType                          0.0183
+  VehicleCategory                     0.0154
+  Fault                               0.0114
+  PastNumberOfClaims                  0.0044
+  Days_Policy_Accident                0.0040
+  Sex                                 0.0039
+  MonthClaimed                        0.0036
+  AddressChange_Claim                 0.0034
+  AccidentArea                        0.0030
+  DriverRating                        0.0030
+  NumberOfCars                        0.0028
+  Make                                0.0021
+  MaritalStatus                       0.0014
+  Deductible                          0.0013
+  AgeOfVehicle                        0.0013
+  Age                                 0.0009
+  AgeOfPolicyHolder                   0.0009
+  VehiclePrice                        0.0006
+  WeekOfMonthClaimed                  0.0005
+  AgentType                           0.0004
+  Year                                0.0003
+  Days_Policy_Claim                   0.0002
+  Month                               0.0000
+  DayOfWeek                           0.0000
+  DayOfWeekClaimed                    0.0000
+  WeekOfMonth                         0.0000
+  NumberOfSuppliments                 0.0000
+  PoliceReportFiled                   0.0000
+  WitnessPresent                      0.0000
+
+── 3. POINT-BISERIAL CORRELATION (numeric features vs label) 
+  Measures linear relationship between each numeric feature
+  and the binary fraud label. Positive = more likely fraud.
+
+  Feature                          Correlation     p-value
+  ------------------------------  ------------  ----------
+  PastNumberOfClaims                   -0.0573      0.0000 *
+  Age                                  -0.0297      0.0002 *
+  Days_Policy_Accident                 -0.0242      0.0026 *
+  Deductible                            0.0173      0.0312 *
+  Days_Policy_Claim                    -0.0167      0.0379 *
+  PoliceReportFiled                    -0.0160      0.0468 *
+  WeekOfMonth                          -0.0119      0.1408
+  WitnessPresent                       -0.0081      0.3171
+  DriverRating                          0.0073      0.3669
+  WeekOfMonthClaimed                   -0.0058      0.4744
+  AgentType                                nan         nan
+  NumberOfSuppliments                  -0.0326      0.0001 *
+  Year                                 -0.0248      0.0021 *
+
+  * = statistically significant at p < 0.05
+
+── 4. CHI-SQUARED TEST (categorical features vs FraudFound_P)
+  Low p-value = the feature distribution differs significantly
+  between fraudulent and legitimate claims.
+
+  Feature                               Chi2     p-value    DoF
+  ------------------------------  ----------  ----------  -----
+  PolicyType                          437.40      0.0000      8 *
+  BasePolicy                          402.85      0.0000      2 *
+  VehicleCategory                     290.94      0.0000      2 *
+  Fault                               264.95      0.0000      1 *
+  AddressChange_Claim                 104.73      0.0000      4 *
+  VehiclePrice                         67.77      0.0000      5 *
+  Make                                 59.81      0.0000     18 *
+  MonthClaimed                         42.27      0.0000     12 *
+  AgeOfPolicyHolder                    33.00      0.0001      8 *
+  Month                                29.80      0.0017     11 *
+  AgeOfVehicle                         21.93      0.0026      7 *
+  AccidentArea                         16.84      0.0000      1 *
+  Sex                                  13.49      0.0002      1 *
+  DayOfWeek                            10.15      0.1185      6
+  DayOfWeekClaimed                      5.16      0.6405      7
+  NumberOfCars                          2.42      0.6597      4
+  MaritalStatus                         1.01      0.7980      3
+
+  * = statistically significant at p < 0.05
+
+── 5. TOP FRAUD SIGNAL SUMMARY ─────────────────────────────
+  Features to prioritise in Isolation Forest feature matrix:
+  1. BasePolicy  (MI = 0.0219)
+  2. PolicyType  (MI = 0.0183)
+  3. VehicleCategory  (MI = 0.0154)
+  4. Fault  (MI = 0.0114)
+  5. PastNumberOfClaims  (MI = 0.0044)
+
+  Recommended contamination: 0.0599  (matches actual fraud rate)
+
+=================================================================
