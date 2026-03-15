@@ -5,11 +5,14 @@ Shared utility functions used across all pipeline scripts.
 """
 
 import yaml
+from pathlib import Path
 
+_PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = _PROJECT_ROOT  # expose for use in notebooks and scripts
 
 def load_config(path="configs/config.yaml"):
-    """Load the central YAML configuration file."""
-    with open(path, "r") as f:
+    """Load YAML configuration file from the project root."""
+    with open(_PROJECT_ROOT / path, "r") as f:
         return yaml.safe_load(f)
 
 

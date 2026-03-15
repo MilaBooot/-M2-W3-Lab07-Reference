@@ -1,0 +1,254 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.env
+.venv
+ENV/
+env.bak/
+venv.bak/
+pythonenv.*
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+.cache/
+*.ipynb_checkpoints
+
+# Data files - exclude raw data, include processed data structure
+data/
+!data/
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/external/*
+!data/external/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.parquet
+*.feather
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.joblib
+*.json
+*.geojson
+*.db
+*.sqlite
+*.sqlite3
+*.zip
+*.gz
+*.tar
+*.bz2
+*.7z
+*.rar
+
+# Model files - keep directory structure but exclude model files
+models/
+!models/
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.joblib
+*.pt
+*.pth
+*.pb
+*.onnx
+*.tflite
+*.mlmodel
+*.mar
+*.bin
+*.ckpt
+*.json
+*.weights
+*.pth.tar
+
+# MLflow
+mlruns/
+mlflow/
+*.mlflow
+
+# TensorFlow
+*.tfevents
+*.tfrecord
+*.tfrecords
+*.meta
+*.index
+*.data-*
+checkpoint/
+event-logs/
+
+# PyTorch
+lightning_logs/
+*.pt
+*.pth
+*.pth.tar
+
+# WandB
+wandb/
+wandb-*/
+*.wandb
+
+# DVC
+.dvc/
+*.dvc
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.pydevproject
+.settings/
+
+# Virtual Environment
+venv/
+env/
+ENV/
+myenv/
+virtualenv/
+.virtualenv/
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+*.log
+
+# Logs
+*.log
+logs/
+log/
+
+# Large files
+*.npy
+*.npz
+*.mat
+*.pkl
+*.p
+*.pk
+*.nc
+
+# Image files (if you're working with images)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.webp
+*.svg
+
+# Audio/Video (if working with multimedia)
+*.mp3
+*.wav
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+.benchmarks/
+
+# Documentation
+docs/_build/
+site/
+*.rdb
+
+# Secrets and keys
+*.pem
+*.key
+*.crt
+*.cert
+*.p12
+*.pfx
+*.secret
+*.password
+*.token
+credentials.json
+client_secret.json
+service_account.json
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+# Application specific
+*.streamlit/
+.streamlit/secrets.toml
+*.gradio/
+*.fastapi/
+
+# Notebook exports
+*.html
+*.pdf
+*.docx
+# But keep README and documentation
+!README.md
+!README.html
+!*.pdf
